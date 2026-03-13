@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Work — HOLYHUMANE</title>
+  <link rel="stylesheet" href="global.css"/>
+  <script src="shared.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    .work-hero {
+      padding: 180px 0 80px;
+    }
+    .work-hero-inner {
+      display:flex; align-items:flex-end; justify-content:space-between; gap:40px;
+    }
+    .work-hero h1 {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(4rem,9vw,10rem);
+      letter-spacing:.03em; line-height:.85;
+      color:var(--text);
+    }
+    .work-hero h1 em {
+      font-family:'DM Sans',sans-serif;
+      font-style:italic; font-weight:200;
+      font-size:clamp(1.2rem,2.5vw,2.8rem);
+      display:block; margin-top:14px;
+      color:var(--text-2); letter-spacing:.04em;
+    }
+    .work-hero-meta {
+      text-align:right;
+    }
+    .work-hero-meta p {
+      font-size:.72rem; font-weight:300; letter-spacing:.12em;
+      color:var(--text-2); line-height:1.8;
+    }
+    .work-hero-meta strong { color:var(--text); font-weight:500; }
+
+    /* full grid */
+    .all-grid {
+      display:grid; grid-template-columns:1fr 1fr; gap:3px;
+      margin-bottom:120px;
+    }
+
+    .wg-card {
+      position:relative; overflow:hidden;
+      background:var(--bg-2); display:block;
+      cursor:none; text-decoration:none; color:inherit;
+      transition: background .4s ease;
+    }
+    .wg-card:nth-child(odd)  { aspect-ratio:3/3.5; }
+    .wg-card:nth-child(even) { aspect-ratio:3/2.8; margin-top:48px; }
+    .wg-card:nth-last-child(-n+2) { margin-bottom:48px; }
+
+    .wg-img {
+      position:absolute; inset:0; width:100%; height:100%;
+      object-fit:cover;
+      transition: transform 1s var(--ease-out), opacity .4s ease;
+    }
+    .wg-vid {
+      position:absolute; inset:0; width:100%; height:100%;
+      object-fit:cover; opacity:0;
+      transition: opacity .5s ease, transform 1s var(--ease-out);
+    }
+    .wg-card:hover .wg-img { transform:scale(1.06); opacity:.06; }
+    .wg-card:hover .wg-vid { opacity:1; transform:scale(1.03); }
+
+    .wg-overlay {
+      position:absolute; inset:0; z-index:2;
+      background:linear-gradient(to top, rgba(0,0,0,.7) 0%, transparent 55%);
+      display:flex; flex-direction:column; justify-content:flex-end;
+      padding:30px;
+    }
+    [data-theme="light"] .wg-overlay {
+      background:linear-gradient(to top, rgba(15,28,40,.65) 0%, transparent 55%);
+    }
+    .wg-num { font-size:.58rem; letter-spacing:.3em; color:var(--accent-2); margin-bottom:6px; }
+    .wg-title {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:2rem; letter-spacing:.05em; line-height:1;
+      color:#f0ece5; margin-bottom:5px;
+    }
+    .wg-tags {
+      display:flex; gap:8px; flex-wrap:wrap; margin-bottom:6px;
+    }
+    .wg-tag {
+      font-size:.58rem; letter-spacing:.14em; text-transform:uppercase;
+      color:rgba(240,236,229,.5);
+      border:1px solid rgba(240,236,229,.18);
+      padding:3px 8px; border-radius:2px;
+    }
+    .wg-desc { font-size:.72rem; font-weight:300; color:rgba(240,236,229,.55); line-height:1.6; }
+
+    .wg-arrow {
+      position:absolute; top:22px; right:22px; z-index:3;
+      width:36px; height:36px; border-radius:50%;
+      border:1px solid rgba(240,236,229,.2);
+      display:flex; align-items:center; justify-content:center;
+      color:#f0ece5; opacity:0;
+      transform:scale(.7) rotate(-45deg);
+      transition: opacity .3s ease, transform .35s ease;
+    }
+    .wg-arrow svg { width:13px; height:13px; }
+    .wg-card:hover .wg-arrow { opacity:1; transform:scale(1) rotate(0deg); }
+
+    /* reveal */
+    .wg-card { opacity:0; transform:translateY(36px); }
+
+    @media(max-width:900px){
+      .all-grid { grid-template-columns:1fr; }
+      .wg-card:nth-child(n) { margin:0; aspect-ratio:4/3; }
+      .work-hero-inner { flex-direction:column; align-items:flex-start; }
+      .work-hero-meta { text-align:left; }
+    }
+  </style>
+</head>
+<body>
+  <div id="hh-cur"></div>
+  <div id="hh-ring"></div>
+  <div id="nav-placeholder" data-page="Work"></div>
+
+  <section class="work-hero container">
+    <div class="work-hero-inner reveal">
+      <h1>ALL<br/>WORK<em>every visual.</em></h1>
+      <div class="work-hero-meta">
+        <p><strong>4 Projects</strong></p>
+        <p>Blender · Motion · Logos</p>
+        <p>3D · Animation · Visual</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee">
+    <div class="marquee-track">
+      <div class="mq-item"><span>Blender 3D</span><div class="mq-dot"></div></div>
+      <div class="mq-item"><span>Motion Design</span><div class="mq-dot"></div></div>
+      <div class="mq-item"><span>Logo Animation</span><div class="mq-dot"></div></div>
+      <div class="mq-item"><span>Cinematic Renders</span><div class="mq-dot"></div></div>
+      <div class="mq-item"><span>Visual Experiments</span><div class="mq-dot"></div></div>
+      <div class="mq-item"><span>Blender 3D</span><div class="mq-dot"></div></div>
+      <div class="mq-item"><span>Motion Design</span><div class="mq-dot"></div></div>
+      <div class="mq-item"><span>Logo Animation</span><div class="mq-dot"></div></div>
+      <div class="mq-item"><span>Cinematic Renders</span><div class="mq-dot"></div></div>
+      <div class="mq-item"><span>Visual Experiments</span><div class="mq-dot"></div></div>
+    </div>
+  </div>
+
+  <main class="container" style="padding-top:60px;">
+    <div class="all-grid">
+
+      <a href="project-1.html" class="wg-card">
+        <img class="wg-img" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1400&q=85" alt="Product Worlds"/>
+        <video class="wg-vid" muted loop playsinline preload="metadata"><source src="./assets/videos/age.mp4" type="video/mp4"/></video>
+        <div class="wg-overlay">
+          <p class="wg-num">01</p>
+          <div class="wg-tags"><span class="wg-tag">3D</span><span class="wg-tag">CGI</span><span class="wg-tag">Product</span></div>
+          <h3 class="wg-title">Product Worlds</h3>
+          <p class="wg-desc">Clean CGI compositions with cinematic framing and surface detail.</p>
+        </div>
+        <div class="wg-arrow"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
+      </a>
+
+      <a href="project-2.html" class="wg-card">
+        <img class="wg-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1400&q=85" alt="Logo Motion"/>
+        <video class="wg-vid" muted loop playsinline preload="metadata"><source src="./assets/videos/zua.mp4" type="video/mp4"/></video>
+        <div class="wg-overlay">
+          <p class="wg-num">02</p>
+          <div class="wg-tags"><span class="wg-tag">Branding</span><span class="wg-tag">Animation</span><span class="wg-tag">Logo</span></div>
+          <h3 class="wg-title">Logo Motion</h3>
+          <p class="wg-desc">Brand identity brought to life through frame-perfect animation.</p>
+        </div>
+        <div class="wg-arrow"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
+      </a>
+
+      <a href="project-3.html" class="wg-card">
+        <img class="wg-img" src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=1400&q=85" alt="Device Motion"/>
+        <video class="wg-vid" muted loop playsinline preload="metadata"><source src="./assets/videos/phone.mp4" type="video/mp4"/></video>
+        <div class="wg-overlay">
+          <p class="wg-num">03</p>
+          <div class="wg-tags"><span class="wg-tag">Motion</span><span class="wg-tag">Device</span><span class="wg-tag">Loop</span></div>
+          <h3 class="wg-title">Device Motion</h3>
+          <p class="wg-desc">Object-based storytelling, camera movement, and polished motion loops.</p>
+        </div>
+        <div class="wg-arrow"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
+      </a>
+
+      <a href="project-4.html" class="wg-card">
+        <img class="wg-img" src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1400&q=85" alt="Motion Studies"/>
+        <video class="wg-vid" muted loop playsinline preload="metadata"><source src="./assets/videos/hair.mp4" type="video/mp4"/></video>
+        <div class="wg-overlay">
+          <p class="wg-num">04</p>
+          <div class="wg-tags"><span class="wg-tag">Experimental</span><span class="wg-tag">Loop</span><span class="wg-tag">Study</span></div>
+          <h3 class="wg-title">Motion Studies</h3>
+          <p class="wg-desc">Short looping pieces focused on rhythm, softness, and movement.</p>
+        </div>
+        <div class="wg-arrow"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
+      </a>
+
+    </div>
+  </main>
+
+  <footer class="footer container" id="contact">
+    <div class="footer-top reveal">
+      <h3 class="footer-heading">LIKE WHAT<br/>YOU SEE?<em>let's work together.</em></h3>
+      <a class="footer-email" href="mailto:hello@holyhumane.com">hello@holyhumane.com</a>
+    </div>
+    <div class="socials">
+      <div class="soc" data-s="linkedin"><a href="https://www.linkedin.com/" target="_blank" data-s="linkedin"><div class="fill"></div><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 8.5H3.56V20h3.38V8.5Zm.22-3.56a1.96 1.96 0 1 0-3.92 0a1.96 1.96 0 0 0 3.92 0ZM20.44 13.01c0-3.28-1.75-4.81-4.09-4.81c-1.89 0-2.73 1.04-3.2 1.77V8.5H9.77c.04.98 0 11.5 0 11.5h3.38v-6.99Z"/></svg></a><div class="tip">LinkedIn</div></div>
+      <div class="soc" data-s="instagram"><a href="https://www.instagram.com/" target="_blank" data-s="instagram"><div class="fill"></div><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.8A3.95 3.95 0 0 0 3.8 7.75v8.5a3.95 3.95 0 0 0 3.95 3.95h8.5a3.95 3.95 0 0 0 3.95-3.95v-8.5a3.95 3.95 0 0 0-3.95-3.95h-8.5Zm8.95 1.35a1.1 1.1 0 1 1 0 2.2a1.1 1.1 0 0 1 0-2.2ZM12 6.85A5.15 5.15 0 1 1 6.85 12A5.15 5.15 0 0 1 12 6.85Zm0 1.8A3.35 3.35 0 1 0 15.35 12A3.35 3.35 0 0 0 12 8.65Z"/></svg></a><div class="tip">Instagram</div></div>
+      <div class="soc" data-s="fiverr"><a href="https://www.fiverr.com/" target="_blank" data-s="fiverr"><div class="fill"></div><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.6 4.2c1.16 0 2.03.3 2.63.9c.6.6.9 1.4.9 2.42c0 .24-.01.46-.04.66h-2.82a2.03 2.03 0 0 0 .02-.29c0-.77-.38-1.16-1.13-1.16c-.75 0-1.12.39-1.12 1.16v1.2h3v2.47h-3V20H9.14v-8.44H7.2V9.09h1.94V7.8c0-1.15.38-2.04 1.13-2.66c.75-.63 1.86-.94 3.33-.94Zm4.2 14.38a1.7 1.7 0 1 1 0-3.4a1.7 1.7 0 0 1 0 3.4Z"/></svg></a><div class="tip">Fiverr</div></div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 Holyhumane.</p>
+      <div class="status"><div class="status-dot"></div>Available for new projects</div>
+    </div>
+  </footer>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+    const cur=document.getElementById('hh-cur'),ring=document.getElementById('hh-ring');
+    let mx=0,my=0,rx=0,ry=0;
+    window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;gsap.to(cur,{x:mx,y:my,duration:.1});});
+    (function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;gsap.set(ring,{x:rx,y:ry});requestAnimationFrame(loop);})();
+    document.querySelectorAll('a,button,.wg-card').forEach(el=>{
+      el.addEventListener('mouseenter',()=>document.body.classList.add('cur-hover'));
+      el.addEventListener('mouseleave',()=>document.body.classList.remove('cur-hover'));
+    });
+    gsap.utils.toArray('.wg-card').forEach((c,i)=>{
+      gsap.to(c,{opacity:1,y:0,duration:.9,ease:'power3.out',scrollTrigger:{trigger:c,start:'top 90%'},delay:i*.06});
+    });
+    gsap.utils.toArray('.reveal').forEach(el=>{
+      gsap.to(el,{opacity:1,y:0,duration:.8,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%'}});
+    });
+    const desk=window.matchMedia('(min-width:769px)').matches;
+    document.querySelectorAll('.wg-card').forEach(card=>{
+      const v=card.querySelector('.wg-vid');
+      card.addEventListener('mouseenter',()=>{if(v&&desk){v.currentTime=0;v.play().catch(()=>{})}});
+      card.addEventListener('mouseleave',()=>{if(v){v.pause();v.currentTime=0;}});
+    });
+  </script>
+</body>
+</html>

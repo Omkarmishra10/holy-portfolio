@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Device Motion — HOLYHUMANE</title>
+  <link rel="stylesheet" href="global.css"/><script src="shared.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    .proj-hero{padding-top:140px;padding-bottom:0;}
+    .proj-back{display:inline-flex;align-items:center;gap:10px;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--text-2);margin-bottom:48px;transition:gap .25s ease,color .25s ease;}
+    .proj-back:hover{gap:16px;color:var(--text);}
+    .proj-back svg{width:14px;height:14px;}
+    .proj-meta-row{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;margin-bottom:48px;}
+    .proj-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,8vw,9rem);letter-spacing:.03em;line-height:.85;color:var(--text);}
+    .proj-title em{font-family:'DM Sans',sans-serif;font-style:italic;font-weight:200;font-size:clamp(1rem,2.2vw,2.2rem);display:block;margin-top:12px;letter-spacing:.04em;color:var(--text-2);}
+    .proj-specs{display:flex;flex-direction:column;gap:0;min-width:220px;border-top:1px solid var(--line);}
+    .proj-spec{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);}
+    .proj-spec span:first-child{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-2);}
+    .proj-spec span:last-child{font-size:.76rem;color:var(--text);}
+    .proj-cover{width:100%;aspect-ratio:16/9;overflow:hidden;background:var(--bg-2);position:relative;}
+    .proj-cover img{width:100%;height:100%;object-fit:cover;}
+    .proj-cover video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+    .proj-body{padding:80px 0 60px;}
+    .proj-body-inner{display:grid;grid-template-columns:1fr 1.4fr;gap:80px;align-items:start;}
+    .proj-body-left h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,3.5vw,3.8rem);letter-spacing:.03em;line-height:.9;margin-bottom:28px;color:var(--text);}
+    .proj-body-right p{font-size:.97rem;font-weight:300;line-height:1.9;color:var(--text-2);margin-bottom:20px;}
+    .proj-body-right p strong{color:var(--text);font-weight:500;}
+    .proj-gallery{padding:0 0 80px;}
+    .gallery-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;}
+    .gallery-item{overflow:hidden;background:var(--bg-2);}
+    .gallery-item:nth-child(1){aspect-ratio:1/1;}
+    .gallery-item:nth-child(2){aspect-ratio:1/1;margin-top:40px;}
+    .gallery-item:nth-child(3){aspect-ratio:16/9;grid-column:1/-1;}
+    .gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease-out);}
+    .gallery-item:hover img{transform:scale(1.04);}
+    .next-proj{border-top:1px solid var(--line);padding:64px 0;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+    .next-proj-label{font-size:.64rem;letter-spacing:.28em;text-transform:uppercase;color:var(--text-2);margin-bottom:12px;}
+    .next-proj-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,4.5rem);letter-spacing:.03em;line-height:.9;color:var(--text);transition:opacity .25s ease;}
+    .next-proj-link:hover .next-proj-title{opacity:.6;}
+    .next-arrow{width:56px;height:56px;border-radius:50%;border:1px solid var(--line);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--text);transition:background .25s ease,transform .25s ease;}
+    .next-proj-link:hover .next-arrow{background:var(--text);color:var(--bg);transform:rotate(45deg);}
+    .next-arrow svg{width:20px;height:20px;}
+    @media(max-width:900px){.proj-meta-row{flex-direction:column;align-items:flex-start;}.proj-body-inner{grid-template-columns:1fr;gap:40px;}.gallery-grid{grid-template-columns:1fr;}.gallery-item:nth-child(n){margin:0;aspect-ratio:4/3;}}
+  </style>
+</head>
+<body>
+  <div id="hh-cur"></div><div id="hh-ring"></div>
+  <div id="nav-placeholder" data-page="Work"></div>
+
+  <section class="proj-hero container">
+    <a href="work.html" class="proj-back"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>All Work</a>
+    <div class="proj-meta-row reveal">
+      <h1 class="proj-title">Device<br/>Motion<em>Object · Storytelling · 2024</em></h1>
+      <div class="proj-specs">
+        <div class="proj-spec"><span>Type</span><span>Motion / Loop</span></div>
+        <div class="proj-spec"><span>Tool</span><span>Blender</span></div>
+        <div class="proj-spec"><span>Year</span><span>2024</span></div>
+        <div class="proj-spec"><span>Format</span><span>MP4 / WebM</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="proj-cover reveal">
+    <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=1800&q=90" alt="Device Motion cover"/>
+    <video autoplay muted loop playsinline><source src="./assets/videos/phone.mp4" type="video/mp4"/></video>
+  </div>
+
+  <section class="proj-body container">
+    <div class="proj-body-inner">
+      <div class="proj-body-left reveal"><h2>OBJECT<br/>STORYTELLING</h2></div>
+      <div class="proj-body-right reveal">
+        <p>Devices carry stories. This project uses <strong>product animation</strong> as a narrative tool — how a phone moves through space, how light glances off its surface, how the reveal is timed to feel inevitable.</p>
+        <p>Built with careful attention to <strong>camera path and easing</strong>. No rushed cuts, no cheap transitions. Each loop is complete in itself.</p>
+        <p>Optimised for hero sections, product pages, and social content where motion is the first thing someone sees.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="proj-gallery container">
+    <div class="gallery-grid">
+      <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=900&q=85" alt=""/></div>
+      <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=900&q=85" alt=""/></div>
+      <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1800&q=85" alt=""/></div>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="next-proj">
+      <div><p class="next-proj-label">Next Project</p>
+        <a href="project-4.html" class="next-proj-link"><p class="next-proj-title">MOTION<br/>STUDIES</p></a>
+      </div>
+      <a href="project-4.html" class="next-proj-link"><div class="next-arrow"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></a>
+    </div>
+  </div>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+    const cur=document.getElementById('hh-cur'),ring=document.getElementById('hh-ring');
+    let mx=0,my=0,rx=0,ry=0;
+    window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;gsap.to(cur,{x:mx,y:my,duration:.1});});
+    (function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;gsap.set(ring,{x:rx,y:ry});requestAnimationFrame(loop);})();
+    document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('cur-hover'));el.addEventListener('mouseleave',()=>document.body.classList.remove('cur-hover'));});
+    gsap.utils.toArray('.reveal').forEach((el,i)=>{ gsap.to(el,{opacity:1,y:0,duration:.85,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 90%'},delay:i<3?.1*i:0}); });
+  </script>
+</body>
+</html>
